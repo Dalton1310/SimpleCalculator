@@ -44,10 +44,12 @@ def validate():
         calculate()
     else:
         error_val["text"] = "One of your terms has an invalid character or is empty!"
+        total_label['text'] = ""
 
 
-#Calculates the end result
+#Calculates the end result once the user data is validated
 def calculate():
+    result = 0
     error_val['text'] = ""
     first_term = float(term_one.get())
     second_term = float(term_two.get())
@@ -62,6 +64,7 @@ def calculate():
         case '/':
             if second_term == 0:
                 error_val["text"] = "Cannot Divide by 0!"
+                return
             else:
                 result = first_term / second_term
         case '%':
@@ -72,7 +75,8 @@ def calculate():
 
 
 #Shows welcome message at top of the screen
-calculator_title = ttk.Label(text="Welcome to the Simple Calculator!",style= "elder.TLabel", font=('Times','25'))
+calculator_title = ttk.Label(text="Welcome to the Simple Calculator!",
+                             style= "elder.TLabel", font=('Times','25'))
 calculator_title.pack(side='top', anchor='center', pady=20)
 
 #Entry that is used as the first term for calculations
@@ -81,25 +85,34 @@ term_one.place(relx=0.35, rely=0.25, relwidth=0.10, relheight=0.05)
 
 #Combobox that is used as the mathematical symbol for calculations
 current_symbol = tk.StringVar()
-math_symbol = ttk.Combobox(root, textvariable=current_symbol, state='readonly',style="elder.TCombobox")
-math_symbol['values'] = ('+', '-', '/', '*', '%')
+math_symbol = ttk.Combobox(root, textvariable=current_symbol, 
+                           state='readonly',style="elder.TCombobox")
+math_symbol['values'] = ('+', 
+                         '-', 
+                         '/', 
+                         '*', 
+                         '%')
 math_symbol.place(relx=0.48, rely=0.25, relwidth=0.04, relheight=0.05)
 
 #Entry that is used as the second term for calculations
 term_two = ttk.Entry(style="elder.TEntry", foreground= "black")
 term_two.place(relx=0.55, rely=0.25, relwidth=0.10, relheight=0.05)
 
-
+#Any potential Error messages shown to user
 error_val = ttk.Label(style="elder.TLabel")
 error_val.place(anchor= tk.CENTER,relx = 0.5, rely=0.35)
 
-calculate_button = ttk.Button(root, text="Calculate", command=validate, style="elder.TButton")
+#Button that calls for validation of user input and to calculate the function if valid data
+calculate_button = ttk.Button(root, text="Calculate", 
+                              command=validate, style="elder.TButton")
 calculate_button.place(relx=0.4, rely=0.4, relwidth=0.2)
 
+#Label that gives the total for a function
 total_label = ttk.Label(root, text="", style = "elder.TLabel")
 
-
-exit_button = ttk.Button(root, text="Exit Application", command=Close, style="elder.TButton")
+#Exits the application
+exit_button = ttk.Button(root, text="Exit Application", command=Close, 
+                         style="elder.TButton")
 exit_button.place(relx=0.4, rely=0.85, relwidth=0.2)
 
 root.mainloop()
