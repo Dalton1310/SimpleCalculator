@@ -2,6 +2,8 @@ from tkinter import ttk
 import tkinter as tk
 import customtkinter as ctk
 
+# Load the icon image  
+  
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
@@ -17,11 +19,12 @@ def switch_page(page_name):
 
 root = ctk.CTk()
 my_menu = tk.Menu(root)
+root.iconbitmap("calculator.ico")  # Use .ico file directly with iconbitmap
 
 # Stylize Root
 root.config(width=1920, height=1080, menu=my_menu)
 root.title("Simple Calculator")
-root.attributes('-fullscreen', True)
+#root.attributes('-fullscreen', True)
 root.option_add('*TCombobox*Listbox.font', ('Times', '15'))
 
 # Frame for the navigation panel
@@ -133,10 +136,10 @@ term_one.place(relx=0.35, rely=0.25, relwidth=0.10, relheight=0.05)
 
 math_symbol = ctk.CTkComboBox(calculator_frame,
                             state='readonly', 
-                            dropdown_font=('Times', 15),
-                            font=('Times', 15),
+                            dropdown_font=('Times', 20),
+                            font=('Times', 20),
                             values=['+', '-', '/', '*', '%'],)
-math_symbol.place(relx=0.48, rely=0.25, relwidth=0.04, relheight=0.05)
+math_symbol.place(relx=0.48, rely=0.26, relwidth=0.04)
 
 # Entry that is used as the second term for calculations
 term_two = ctk.CTkEntry(calculator_frame, font=('Times', 20))
